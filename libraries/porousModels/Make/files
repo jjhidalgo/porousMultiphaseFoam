@@ -21,5 +21,9 @@ phaseModels/incompressiblePhase/incompressiblePhase.C
 
 mixtures/multiscalarMixture/multiscalarMixture.C
 
+densityModels/densityModel/densityModel.C
+densityModels/densityModel/densityModelNew.C
+densityModels/linearDensity/linearDensity.C
+
 LIB = $(FOAM_USER_LIBBIN)/libporousModels
 

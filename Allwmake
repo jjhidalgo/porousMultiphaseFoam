@@ -19,9 +19,13 @@ wmake solvers/groundwaterTransport2DFoam
 wmake solvers/groundwaterTransportFoam
 wmake solvers/stationaryGroundwater2DFoam
 wmake solvers/stationaryGroundwaterFoam
+wmake solvers/vardensFoam
+wmake solvers/satdensFoam
 
 # Compiling utilities
 wmake utilities/darcyFoam
 wmake utilities/setBoundaryHeadPressure
 wmake utilities/setFieldsFromXY
 wmake utilities/setFieldsFromMNT
+
+

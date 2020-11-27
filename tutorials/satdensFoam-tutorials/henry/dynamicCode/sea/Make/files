@@ -1,0 +1,6 @@
+/* dynamicCode:
+ * SHA1 = 867e97ab44d3e5c0c326ee9f8cd863082751f18b
+ */
+fixedValueFvPatchFieldTemplate.C
+
+LIB = $(PWD)/../platforms/$(WM_OPTIONS)/lib/libsea_867e97ab44d3e5c0c326ee9f8cd863082751f18b

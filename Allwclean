@@ -21,6 +21,8 @@ then
     rm -f $FOAM_USER_APPBIN/porousScalarTransportFoam
     rm -f $FOAM_USER_APPBIN/stationaryGroundwater2DFoam
     rm -f $FOAM_USER_APPBIN/stationaryGroundwaterFoam
+    rm -f $FOAM_USER_APPBIN/vardensFoam
+    rm -f $FOAM_USER_APPBIN/satdensFoam    
     # clean dynamic libraries
     rm -f $FOAM_USER_LIBBIN/libporousBoundaryConditions.so
     rm -f $FOAM_USER_LIBBIN/libporousModels.so

@@ -1,0 +1,77 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      h;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 0 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    x0
+    {
+      type            darcyGradPressure;
+    }
+    x1
+    {
+        type            codedFixedValue;
+        value           uniform 0;
+	redirectType    sea;
+        name            seaside;
+        code            #{
+            const vector axis(0, 1, 0);
+	    operator==(1.02499 - 0.02499*mag(this->patch().Cf() & axis));
+
+        #};
+	codeInclude
+        #{
+          #include "fvCFD.H"
+        #};
+
+        codeOptions
+        #{
+          -I$(FOAM_CASE)/incl                 \
+          -I$(LIB_SRC)/finiteVolume/lnInclude \
+          -I$(LIB_SRC)/meshTools/lnInclude
+        #};
+    
+        codeLibs
+        #{
+          -lmeshTools \
+          -lfiniteVolume
+         #};
+	
+    }
+    y0
+    {
+        type            zeroGradient;
+    }
+    y1
+    {
+        type            zeroGradient;
+    }
+    z1
+    {
+        type            empty;
+    }
+    z0
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //
