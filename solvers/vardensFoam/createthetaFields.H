@@ -1,7 +1,6 @@
 //- relative permeability (kr)
 krModel->correct();
-volScalarField krtheta = krModel->krb();
-
+const volScalarField& krtheta = krModel->krb();
 surfaceScalarField krthetaf ("krthetaf",fvc::interpolate(krtheta,"krtheta"));
 surfaceScalarField rhocf ("rhocf",fvc::interpolate(rhoc,"rho"));
 surfaceScalarField rhoC0f ("rho0f",fvc::interpolate(rhoC0,"rhoC0"));

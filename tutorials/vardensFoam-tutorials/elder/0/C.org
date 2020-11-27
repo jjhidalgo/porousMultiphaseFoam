@@ -1,0 +1,92 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      C;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    left
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.0;
+        value           uniform 0.0;
+    }
+    
+    right
+    {
+        type            zeroGradient;
+    }
+    
+    bottom
+    {
+        type            fixedValue;
+	value           uniform 0.0;
+    }
+    top
+    {
+        type            codedFixedValue;
+        value           uniform 0;
+	redirectType    top;
+        name            top;
+        code            #{
+            const vector axis_x(1, 0, 0);
+	    const vector axis_y(0, 1, 0);
+	    const vector axis_z(0, 0, 1);
+            scalarField x = this->patch().Cf() & axis_x;
+	    scalarField value = 0.*x;
+	    
+	    forAll(patch().Cf(), faceI)
+	      {
+		if(x[faceI]>150)
+		  {
+		    value[faceI] = 1.;
+		  }
+	      }
+	    operator==(value);
+        #};
+	codeInclude
+        #{
+          #include "fvCFD.H"
+        #};
+
+        codeOptions
+        #{
+          -I$(FOAM_CASE)/incl                 \
+          -I$(LIB_SRC)/finiteVolume/lnInclude \
+          -I$(LIB_SRC)/meshTools/lnInclude
+        #};
+    
+        codeLibs
+        #{
+          -lmeshTools \
+          -lfiniteVolume
+         #};
+    }
+    front
+    {
+        type            empty;
+    }
+    back
+    {
+        type            empty;
+    }
+}
+
+
+// ************************************************************************* //

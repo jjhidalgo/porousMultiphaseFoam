@@ -71,8 +71,8 @@ forAll(composition.Y(), speciesi)
         << " Max(" << speciesName << ") = " << max(C).value()
         << " d" << speciesName << "dTmax = " << dCdTmax[speciesi]
         << " mass(" << speciesName << ") = " << fvc::domainIntegrate(C*theta).value()
-        << " dCmax = " << dCdTmax[speciesi]*runTime.deltaTValue()
-        << "Picard iteration: " << iterPicard << " residual = " << resPicardC_aux
-        << endl;
+        << " dCmax = " << dCdTmax[speciesi]*runTime.deltaTValue() << endl;
+    
+    Info<< "Picard iteration (C) : " << iterPicard << " residual = " << resPicardC << endl;
 
 }
