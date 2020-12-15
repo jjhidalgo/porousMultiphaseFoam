@@ -37,9 +37,9 @@ solvers
 
 Picard
 {
-    toleranceH 1e-3;
+    toleranceH 1e-5;
     toleranceC 1e-5;
-    maxIter 10; // 10 by default
+    maxIter 50; // 10 by default
     minIter 3; // 3 by default 
     nIterStability  5; // 5 by default
 }

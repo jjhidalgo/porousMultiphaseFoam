@@ -23,12 +23,15 @@ boundaryField
 {
     x0
     {
-      type            darcyGradPressure;
+      //type            darcyGradPressure;
+      type            fixedValue;
+      value           uniform 1.;
     }
     x1
     {
       type            fixedValue;
-      value           uniform 1;
+      value           uniform 0.;
+	
     }
     y0
     {

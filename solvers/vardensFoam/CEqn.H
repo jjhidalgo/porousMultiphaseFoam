@@ -22,7 +22,7 @@ forAll(composition.Y(), speciesi)
         (
             rhoc * eps * theta * R * fvm::ddt(C)
             + rhoc * fvm::div(phi, C, "div(phi,C)")
-            - rhoc * fvm::laplacian(theta*Deff, C, "laplacian(Deff,C)")
+            - fvm::laplacian(rhoc*theta*Deff, C, "laplacian(Deff,C)")
             ==
             //- sourceTerm_tracer  // JHG needs density
             - rhoc * theta * R * fvm::Sp(lambda,C)

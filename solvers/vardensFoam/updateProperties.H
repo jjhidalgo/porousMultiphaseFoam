@@ -19,3 +19,4 @@ Lf = rhoC0f*Kf*krthetaf/mutheta;
 
 //- compute fluxes
 phiG = (Lf * (rhocf/rhoC0f - 1)*g) & mesh.Sf();
+

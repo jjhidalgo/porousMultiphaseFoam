@@ -172,7 +172,7 @@ volScalarField drhocdC = rhoModel->drhodC();
 //Info << "Computing retardation coefficient R" << endl;
 //scalar R =  1 + (1-epsTotal.value()) * rs.value() * Kd.value() / eps.value();
 
-
+\
 //- head reference
 label hRefCell = 0;
 scalar hRefValue = 0.0;

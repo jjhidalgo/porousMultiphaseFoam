@@ -23,13 +23,13 @@ startTime       0.0;
 
 stopAt          endTime;
 
-endTime         600000;//86400000;
+endTime         6000;
 
 deltaT          60.;
 
 writeControl    adjustableRunTime;
 
-writeInterval   30000;//8640000;
+writeInterval   600;
 
 purgeWrite      0;
 
@@ -43,7 +43,7 @@ timeFormat      general;
 
 timePrecision   6;
 
-adjustTimeStep  yes;
+adjustTimeStep  no;
 
 runTimeModifiable yes;
 
@@ -51,8 +51,8 @@ maxDeltaT	60.;
 
 //- for Picard time step control
 timeStepControl Picard;
-dTFactIncrease  1.1;
-dTFactDecrease  0.9;
+dTFactIncrease  1.0;
+dTFactDecrease  1.0;
 
 //- for h variation time step control
 //timeStepControl dthetamax;

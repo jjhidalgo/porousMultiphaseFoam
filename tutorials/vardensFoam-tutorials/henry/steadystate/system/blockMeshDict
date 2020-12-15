@@ -66,25 +66,25 @@ boundary
  y0
  {
    type patch;
-   faces ((0 3 2 1));
+   faces ((0 1 5 4));
  }
 
  y1
  {
    type patch;
-   faces ((4 5 6 7));
+   faces ((3 7 6 2));
  }
 
  z0
  {
    type empty;
-   faces ((0 1 5 4));
+   faces ((0 3 2 1));
  }
 
  z1
  {
    type empty;
-   faces ((3 7 6 2));
+   faces ((4 7 6 5));
  }
 );
 

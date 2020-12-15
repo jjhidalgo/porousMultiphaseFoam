@@ -40,5 +40,4 @@
 
     phi = phiG-(Mf*fvc::snGrad(h))*mesh.magSf();
     Utheta = fvc::reconstruct(phi);
-
 }

@@ -101,6 +101,7 @@ noConvergence :
             
             //- 1) Flow equation
             #include "hEqn.H"
+            // velocity is updated inside hEqn.H
             //#include "updateProperties.H" I could update here too...
 
             //- 2) scalar transport

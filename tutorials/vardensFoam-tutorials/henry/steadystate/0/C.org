@@ -28,8 +28,7 @@ boundaryField
     }
     x1
     {
-        type            inletOutlet;
-        inletValue      uniform 0.0;
+        type            fixedValue;
         value           uniform 0.0;
     }
     y0

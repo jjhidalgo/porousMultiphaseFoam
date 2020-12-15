@@ -11,4 +11,5 @@ runApplication checkMesh
 cp 0/h.org 0/h
 cp 0/C.org 0/C
 cp 0/Utheta.org 0/Utheta
+cp 0/U.org 0/U
 runApplication vardensFoam 

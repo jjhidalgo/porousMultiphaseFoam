@@ -2,50 +2,58 @@
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
 |  \\    /   O peration     | Version:  5.0                                   |
-|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volScalarField;
+    class       volVectorField;
     location    "0";
-    object      h;
+    object      Utheta;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 1 0 0 0 0 0];
+dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform (0 0 0);
 
 boundaryField
 {
+
     x0
     {
-      type            darcyGradPressure;
+      type            zeroGradient;
+      //type            fixedValue;
+      //value           uniform (6.6e-3 0.0 0.0);
     }
+
     x1
     {
-      type            fixedValue;
-      value           uniform 1;
+        type            zeroGradient;
     }
+
     y0
     {
         type            zeroGradient;
     }
+
     y1
     {
         type            zeroGradient;
     }
-    z1
-    {
-        type            empty;
-    }
+
     z0
     {
         type            empty;
     }
+
+    z1
+    {
+        type            empty;
+    }
+
 }
 
 
