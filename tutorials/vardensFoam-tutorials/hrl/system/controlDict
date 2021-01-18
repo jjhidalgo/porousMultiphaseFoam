@@ -23,13 +23,13 @@ startTime       0.0;
 
 stopAt          endTime;
 
-endTime         31104e3;//62208e4; // 20 years;
+endTime         631152000;
 
-deltaT          3600; //2592e3; // 1 month
+deltaT          876600;
 
 writeControl    adjustableRunTime;
 
-writeInterval   31104e2; //31104e3; //1 year;
+writeInterval   6311520; //31104e3; //1 year;
 
 purgeWrite      0;
 
@@ -57,5 +57,4 @@ dTFactDecrease  0.9;
 //- for h variation time step control
 //timeStepControl dthetamax;
 //dthetamax           0.01;
-
 // ************************************************************************* //

@@ -17,7 +17,56 @@ FoamFile
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 0;
+internalField  #codeStream
+{
+  codeInclude
+  #{
+     #include "fvCFD.H"
+     #include "Random.H"
+     #include "Time.H"
+  #};
+
+  codeOptions
+  #{
+     -I$(LIB_SRC)/finiteVolume/lnInclude \
+     -I$(LIB_SRC)/meshTools/lnInclude
+  #};
+
+  codeLibs
+  #{
+     -lmeshTools \
+     -lfiniteVolume
+  #};
+
+  code
+  #{
+     const IOdictionary& d = static_cast<const IOdictionary&>(dict);
+     const fvMesh& mesh = refCast<const fvMesh>(d.db());
+
+     scalarField C(mesh.nCells(), 0.);
+     Random randObj(time(NULL));      
+ 
+     forAll(C, i)
+     {
+       const scalar x = mesh.C()[i][0];
+       const scalar z = mesh.C()[i][2];
+       const scalar noise = randObj.scalar01();
+       scalar val;
+       C[i] = z/50.;
+       if (z > 24 & z < 26 & x > 99 & x < 101){
+         C[i] = z/50 + 0.1;
+       }
+       //val = z/10. + 0.1*noise;
+       //if(val>1){val = 1;}
+       //if(val<0){val = 0;}
+       //C[i] = val;
+     }
+
+     writeEntry(os, "", C);
+
+  #};
+};
+
 
 boundaryField
 {
@@ -38,43 +87,9 @@ boundaryField
     }
     top
     {
-        type            codedFixedValue;
-        value           uniform 0;
-	redirectType    top;
-        name            top;
-        code            #{
-            const vector axis_x(1, 0, 0);
-	    const vector axis_y(0, 1, 0);
-	    const vector axis_z(0, 0, 1);
-            scalarField x = this->patch().Cf() & axis_x;
-	    scalarField value = 0.*x;
-	    
-	    forAll(patch().Cf(), faceI)
-	      {
-		if(x[faceI]>150)
-		  {
-		    value[faceI] = 1.;
-		  }
-	      }
-	    operator==(value);
-        #};
-	codeInclude
-        #{
-          #include "fvCFD.H"
-        #};
+        type            fixedValue;
+        value           uniform 1.0;
 
-        codeOptions
-        #{
-          -I$(FOAM_CASE)/incl                 \
-          -I$(LIB_SRC)/finiteVolume/lnInclude \
-          -I$(LIB_SRC)/meshTools/lnInclude
-        #};
-    
-        codeLibs
-        #{
-          -lmeshTools \
-          -lfiniteVolume
-         #};
     }
     front
     {

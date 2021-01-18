@@ -9,53 +9,15 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    location    "system";
-    object      controlDict;
+    class       uniformDimensionedVectorField;
+    location    "constant";
+    object      g;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     vardensFoam;
+dimensions      [0 1 -2 0 0 0 0];
+value           (0 0 -1.00);
 
-startFrom       startTime;
 
-startTime       0.0;
-
-stopAt          endTime;
-
-endTime         31104e3;//62208e4; // 20 years;
-
-deltaT          3600; //2592e3; // 1 month
-
-writeControl    adjustableRunTime;
-
-writeInterval   31104e2; //31104e3; //1 year;
-
-purgeWrite      0;
-
-writeFormat     ascii;
-
-writePrecision  6;
-
-writeCompression uncompressed;
-
-timeFormat      general;
-
-timePrecision   6;
-
-adjustTimeStep  yes;
-
-runTimeModifiable yes;
-
-maxDeltaT	2592e3; //1 month
-
-//- for Picard time step control
-timeStepControl Picard;
-dTFactIncrease  1.1;
-dTFactDecrease  0.9;
-
-//- for h variation time step control
-//timeStepControl dthetamax;
-//dthetamax           0.01;
 
 // ************************************************************************* //

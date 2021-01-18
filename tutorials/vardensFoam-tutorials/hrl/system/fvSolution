@@ -11,51 +11,39 @@ FoamFile
     format      ascii;
     class       dictionary;
     location    "system";
-    object      controlDict;
+    object      fvSolution;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     vardensFoam;
+solvers
+{
+    "theta|h"
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-12;
+        relTol          0;
+    }
 
-startFrom       startTime;
+   
+    C
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-12;
+        relTol          0;
+    }
+}   
 
-startTime       0.0;
-
-stopAt          endTime;
-
-endTime         31104e3;//62208e4; // 20 years;
-
-deltaT          3600; //2592e3; // 1 month
-
-writeControl    adjustableRunTime;
-
-writeInterval   31104e2; //31104e3; //1 year;
-
-purgeWrite      0;
-
-writeFormat     ascii;
-
-writePrecision  6;
-
-writeCompression uncompressed;
-
-timeFormat      general;
-
-timePrecision   6;
-
-adjustTimeStep  yes;
-
-runTimeModifiable yes;
-
-maxDeltaT	2592e3; //1 month
-
-//- for Picard time step control
-timeStepControl Picard;
-dTFactIncrease  1.1;
-dTFactDecrease  0.9;
-
-//- for h variation time step control
-//timeStepControl dthetamax;
-//dthetamax           0.01;
+Picard
+{
+    toleranceH 1e-3;
+    toleranceC 1e-4;    
+    maxIter 500; // 10 by default
+    minIter 3; // 3 by default 
+    nIterStability  3; // 5 by default
+    hRefCell 1;
+    hRefValue 50.;
+}
 
 // ************************************************************************* //

@@ -11,13 +11,13 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      C;
+    object      h;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 1 0 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 1;
 
 boundaryField
 {
@@ -29,52 +29,15 @@ boundaryField
     right
     {
         type            zeroGradient;
-    }
-    
-    bottom
-    {
-        type            fixedValue;
-	value           uniform 0.0;
+	
     }
     top
     {
-        type            codedFixedValue;
-        value           uniform 0;
-	redirectType    top;
-        name            top;
-        code            #{
-            const vector axis_x(1, 0, 0);
-	    const vector axis_y(0, 1, 0);
-	    const vector axis_z(0, 0, 1);
-            scalarField x = this->patch().Cf() & axis_x;
-	    scalarField value = 0.*x;
-	    
-	    forAll(patch().Cf(), faceI)
-	      {
-		if(x[faceI]>150)
-		  {
-		    value[faceI] = 1.;
-		  }
-	      }
-	    operator==(value);
-        #};
-	codeInclude
-        #{
-          #include "fvCFD.H"
-        #};
-
-        codeOptions
-        #{
-          -I$(FOAM_CASE)/incl                 \
-          -I$(LIB_SRC)/finiteVolume/lnInclude \
-          -I$(LIB_SRC)/meshTools/lnInclude
-        #};
-    
-        codeLibs
-        #{
-          -lmeshTools \
-          -lfiniteVolume
-         #};
+        type            zeroGradient;
+    }
+    bottom
+    {
+        type            zeroGradient;
     }
     front
     {
